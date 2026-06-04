@@ -20,68 +20,58 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-#MainMenu, footer { visibility: hidden; }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+#MainMenu, footer, header { visibility: hidden; }
 [data-testid="stToolbarActions"], [data-testid="stDeployButton"] { display: none !important; }
 [data-testid="collapsedControl"] { display: none !important; }
-header[data-testid="stHeader"] {
-  background: transparent !important;
-  border-bottom: none !important;
-  box-shadow: none !important;
+header[data-testid="stHeader"] { background: transparent !important; border-bottom: none !important; box-shadow: none !important; }
+
+html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
+  background: #4E32AD !important;
 }
-
-html, body, [data-testid="stAppViewContainer"] { background: #0d0a1a !important; }
-[data-testid="stMain"], [data-testid="stVerticalBlock"] { background: #0d0a1a !important; }
+[data-testid="stAppViewContainer"] > .main { background: #4E32AD; }
+[data-testid="stVerticalBlock"] { background: transparent !important; }
 section[data-testid="stSidebar"] { display: none !important; }
+.block-container { max-width: 700px; padding: 2rem 1.5rem; }
 
-* { font-family: Georgia, 'Times New Roman', serif; }
-h1, h2, h3 { color: #c9859a !important; }
-p, li { color: #f5eef8; }
+* { font-family: 'Inter', sans-serif !important; }
+h1, h2, h3 { color: #DCFE77 !important; }
+p, li { color: #F0ECFF !important; }
 
 [data-testid="stTextInput"] input,
 [data-testid="stTextArea"] textarea {
-  background: #150e2a !important;
-  border: 1px solid #2d2040 !important;
-  color: #f5eef8 !important;
-  border-radius: 6px !important;
-  font-family: Georgia, serif !important;
+  background: rgba(255,255,255,.1) !important;
+  color: #F0ECFF !important;
+  border: 1px solid rgba(255,255,255,.2) !important;
+  border-radius: 8px !important;
 }
 [data-testid="stTextInput"] input:focus,
 [data-testid="stTextArea"] textarea:focus {
-  border-color: #c9859a !important;
-  box-shadow: 0 0 0 2px rgba(201,133,154,0.15) !important;
+  border-color: rgba(220,254,119,.5) !important;
+  box-shadow: 0 0 0 2px rgba(220,254,119,.1) !important;
 }
 
-[data-testid="stRadio"] label { color: #f5eef8 !important; font-family: Georgia, serif !important; }
+[data-testid="stRadio"] label { color: rgba(240,236,255,.8) !important; }
 
 [data-testid="stButton"] > button {
-  background: #c9859a !important;
-  color: #0d0a1a !important;
-  border: none !important;
-  border-radius: 6px !important;
-  font-family: Georgia, serif !important;
-  font-weight: 700 !important;
-  font-size: 15px !important;
-  padding: 12px 32px !important;
-  width: 100% !important;
-  transition: all 0.2s !important;
+  background: #FF6B4E !important; color: #fff !important;
+  border: none !important; border-radius: 8px !important;
+  font-weight: 700 !important; font-size: 15px !important;
+  padding: 12px 32px !important; width: 100% !important; transition: .2s !important;
 }
-[data-testid="stButton"] > button:hover {
-  background: #dba0b5 !important;
-  transform: translateY(-1px) !important;
-}
+[data-testid="stButton"] > button:hover { background: #ff8570 !important; transform: translateY(-1px) !important; }
+[data-testid="stButton"] > button:disabled { background: #2B1D8A !important; color: rgba(240,236,255,.4) !important; }
 
 [data-testid="stDownloadButton"] > button {
-  background: transparent !important;
-  color: #c9859a !important;
-  border: 1px solid #c9859a !important;
-  border-radius: 6px !important;
-  font-family: Georgia, serif !important;
+  background: #2B1D8A !important; color: #DCFE77 !important;
+  border: 1px solid rgba(220,254,119,.3) !important; border-radius: 8px !important; width: 100%;
 }
 
-[data-testid="stProgress"] > div > div { background: #c9859a !important; }
-[data-testid="stProgress"] > div { background: #1c1535 !important; }
+[data-testid="stProgress"] > div { background: #2B1D8A !important; border-radius: 6px; }
+[data-testid="stProgress"] > div > div { background: #FF6B4E !important; border-radius: 6px; }
 
-hr { border-color: #1c1535 !important; }
+hr { border-color: rgba(255,255,255,.1) !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -118,9 +108,9 @@ def ir_a(etapa, **kwargs):
 
 # ─── Helpers de UI ────────────────────────────────────────────────────────────
 
-def box(html: str, border_color: str = "#2d2040"):
+def box(html: str, border_color: str = "rgba(220,254,119,.15)"):
     st.markdown(
-        f'<div style="background:#150e2a;border:1px solid {border_color};'
+        f'<div style="background:#2B1D8A;border:1px solid {border_color};'
         f'border-radius:10px;padding:20px 24px;margin-bottom:16px;">{html}</div>',
         unsafe_allow_html=True)
 
@@ -140,15 +130,15 @@ def page_inicio():
 <div style="text-align:center;padding:40px 0 20px;">
   <div style="font-size:52px;margin-bottom:16px;">🪞</div>
   <h1 style="font-size:30px;margin-bottom:8px;">El Espejo de tus Relaciones</h1>
-  <p style="color:#c9859a;font-size:16px;font-style:italic;margin-bottom:24px;">
+  <p style="color:#FF6B4E;font-size:16px;font-style:italic;margin-bottom:24px;">
     Descubre qué herida emocional está guiando tu forma de relacionarte
   </p>
-  <p style="color:#b899c8;font-size:14px;max-width:520px;margin:0 auto 32px;line-height:1.8;">
+  <p style="color:rgba(240,236,255,.8);font-size:14px;max-width:520px;margin:0 auto 32px;line-height:1.8;">
     Basado en el marco de las 5 heridas de Lise Bourbeau e integrado con la filosofía
     de Alejandro Jodorowsky. Dos fases: tu propio diagnóstico y, si quieres,
     el espejo de quienes te conocen.
   </p>
-  <p style="color:#7d6690;font-size:13px;">⏱️ Fase 1: 10 a 15 minutos · Fase 2 (opcional): invitas a 3-5 personas cercanas</p>
+  <p style="color:rgba(240,236,255,.55);font-size:13px;">⏱️ Fase 1: 10 a 15 minutos · Fase 2 (opcional): invitas a 3-5 personas cercanas</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -158,9 +148,9 @@ def page_inicio():
         correo = st.text_input("Tu correo", placeholder="Para recibir tu reporte", key="inp_correo")
 
         st.markdown("""
-<div style="background:#150e2a;border:1px solid #2d2040;border-radius:8px;
-            padding:12px 16px;margin:16px 0;font-size:12px;color:#7d6690;line-height:1.7;">
-<strong style="color:#c9859a;">Aviso importante:</strong><br>
+<div style="background:#2B1D8A;border:1px solid rgba(220,254,119,.15);border-radius:8px;
+            padding:12px 16px;margin:16px 0;font-size:12px;color:rgba(240,236,255,.6);line-height:1.7;">
+<strong style="color:#FF6B4E;">Aviso importante:</strong><br>
 Esta herramienta es un ejercicio de autoconocimiento basado en modelos de desarrollo personal.
 No es un diagnóstico clínico ni reemplaza la atención de un profesional de salud mental.
 Si estás viviendo una crisis emocional, te recomendamos buscar apoyo profesional.
